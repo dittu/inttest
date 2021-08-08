@@ -9,74 +9,76 @@ using TechTalk.SpecFlow;
 namespace CodatExam.Steps
 {
     [Binding]
-    public class CreateNewEmployeeSteps : IDisposable
+    public class CreateNewEmployeeSteps
     {
-        private IWebDriver Driver;
-        private CreateNewEmployee createNewEmployee;
-        private Settings configSettings;
+        private IWebDriver _driver;
+        private CreateNewEmployee _createNewEmployee;
+        private IndexEmployee _indexEmployee;
+        private Settings _configSettings;
         public CreateNewEmployeeSteps(WebDriverContext webDriverContext)
         {
-            Driver = webDriverContext.Driver;
-            configSettings = webDriverContext.configSettings;
-            createNewEmployee = new CreateNewEmployee(Driver);
+                _driver = webDriverContext.Driver;
+                _configSettings = webDriverContext.configSettings;
+                _createNewEmployee = new CreateNewEmployee(_driver);
+                _indexEmployee = new IndexEmployee(_driver, _createNewEmployee);
         }
-        public void Dispose()
+      
+        [Given(@"I am in Codat main page")]
+        public void GivenIAmInCodatMainPage()
         {
-            if(Driver != null)
-            {
-                Driver.Dispose();
-                Driver = null;
-            }
+            _createNewEmployee.NavigateToHomePage(_configSettings.Url);
         }
-
-        [Given(@"I'm in Codat main page")]
-        public void GivenIMInCodatMainPage()
-        {
-            Driver.Navigate().GoToUrl(configSettings.Url);
-            Driver.TitleContains("Index");
-        }
-
+       
         [When(@"I click on '(.*)'")]
         public void WhenIClickOn(string linkName)
         {
-            createNewEmployee.ClickOn(linkName);
+            _createNewEmployee.ClickOn(linkName);
         }
 
         [When(@"I enter ""(.*)"" in ""(.*)""")]
         public void WhenIEnterIn(string value, string fieldName)
         {
-            createNewEmployee.EnterValueInField(value, fieldName);
+            _createNewEmployee.EnterValueInField(value, fieldName);
         }
 
         [Then(@"I should see validations for fields")]
         public void ThenIShouldSeeValidationsForFields(Table table)
         {
             var dictionary = table.ToDictionary();
-            createNewEmployee.VerifyValidationMessage(dictionary);
+            _createNewEmployee.VerifyValidationMessage(dictionary);
         }
 
-        [When(@"I enter valid details for new employee creation")]
-        public void WhenIEnterValidDetailsForNewEmployeeCreation()
+        [When(@"I enter ""(.*)"" details for new employee creation")]
+        public void WhenIEnterDetailsForNewEmployeeCreation(string details)
         {
-            createNewEmployee.EnterValidValuesInFields();
+            _createNewEmployee.EmployeeCreate(details);
         }
+
 
         [Then(@"I should be navigated to page with title containing ""(.*)""")]
         public void ThenIShouldBeNavigatedToPageWithTitleContaining(string title)
         {
-            Driver.TitleContains(title);
+            _driver.TitleContains(title);
         }
 
-        [Then(@"created employee details should be same as entered")]
-        public void ThenCreatedEmployeeDetailsShouldBeSameAsEntered()
+        [Then(@"verify employee details same as entered")]
+        public void ThenVerifyEmployeeDetailsSameAsEntered()
         {
-            createNewEmployee.ValidateValues();
+            _createNewEmployee.ValidateValues();
         }
 
-        [Then(@"new employee should be seen in the table")]
-        public void ThenNewEmployeeShouldBeSeenInTheTable()
+        [Then(@"new employee details displayed in the table")]
+        public void ThenNewEmployeeDetailsDisplayedInTheTable()
         {
-            CreateNewEmployee.VerifyCreatedEmployeeInTable();
+            _indexEmployee.VerifyCreatedEmployeeInTable();
+        }
+
+        [When(@"I use same employee Id to create another payer")]
+        public void WhenIUseSameEmployeeIdToCreateAnotherPayer()
+        {
+            _createNewEmployee.NavigateToHomePage(_configSettings.Url);
+            _createNewEmployee.ClickOn("CreateNew");
+            _createNewEmployee.EnterSameEmployeeDetails();
         }
 
     }

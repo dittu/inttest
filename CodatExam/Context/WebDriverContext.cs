@@ -23,14 +23,14 @@ namespace CodatExam.Context
         public WebDriverContext(TestRunContext testRunContext, ScenarioContext scenariocontext)
         {
             if (Driver == null)
-            {
-                
+            {                
                 var builder = new ConfigurationBuilder().SetBasePath(testRunContext.TestDirectory)
                                                         .AddJsonFile("appSettings.json", false, true).Build();
                 configSettings = builder.GetSection("AutomationSettings").Get<Settings>();
                 
                 Driver = WebDrivers.InitBrowser(configSettings.Browser);
                 Driver.Manage().Window.Maximize();
+                Driver.Manage().Cookies.DeleteAllCookies();
             }
         }
 

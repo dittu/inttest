@@ -8,15 +8,15 @@ namespace CodatExam.Pages
 {
     public class DetailsEmployee
     {
-         private IWebDriver Driver { get; set; }
+        private IWebDriver _driver;
         public DetailsEmployee(IWebDriver driver)
         {
-            Driver = driver;
+            _driver = driver;
         }
-        public IWebElement ConfirmedEmployeeId => Driver.FindElement(By.XPath("//dd[@class='col-sm-10'][1]"));
-        public IWebElement ConfirmedHourlyRate => Driver.FindElement(By.XPath("//dd[@class='col-sm-10'][2]"));
-        public IWebElement ConfirmedTimeSheets => Driver.FindElement(By.XPath("//*[@class='table']/tbody/tr"));
-        public IWebElement ConfirmedTimeSheetId => Driver.FindElement(By.XPath("//main/h1"));
+        public IWebElement ConfirmedEmployeeId => _driver.FindElement(By.XPath("//dd[@class='col-sm-10'][1]"));
+        public IWebElement ConfirmedHourlyRate => _driver.FindElement(By.XPath("//dd[@class='col-sm-10'][2]"));
+        public IWebElement ConfirmedTimeSheets => _driver.FindElement(By.XPath("//*[@class='table']/tbody/tr"));
+        public IWebElement ConfirmedTimeSheetId => _driver.FindElement(By.XPath("//main/h1"));
       
     }
 }

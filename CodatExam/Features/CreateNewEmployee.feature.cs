@@ -75,16 +75,16 @@ namespace CodatExam.Features
 #line 3
 #line hidden
 #line 4
-testRunner.Given("I\'m in Codat main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I am in Codat main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("TC_New_01- Empty fields validations for emplyee Id", SourceLine=5)]
-        public virtual void TC_New_01_EmptyFieldsValidationsForEmplyeeId()
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_01, TC_New_02- Empty fields validations for emplyee Id", SourceLine=5)]
+        public virtual void TC_New_01TC_New_02_EmptyFieldsValidationsForEmplyeeId()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_01- Empty fields validations for emplyee Id", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_01, TC_New_02- Empty fields validations for emplyee Id", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -109,13 +109,13 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 7
-testRunner.When("I click on \'Create New\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I click on \'CreateNew\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
 testRunner.And("I enter \" \" in \"HourlyRate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 9
-testRunner.And("I click on \'Add New Row\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I click on \'AddNewRow\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
 testRunner.And("I click on \'Save\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -145,13 +145,14 @@ testRunner.Then("I should see validations for fields", ((string)(null)), table1,
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("TC_New_06- New employee timesheet creation", SourceLine=19)]
-        public virtual void TC_New_06_NewEmployeeTimesheetCreation()
+        public virtual void TC_New_03EmployeeIDValidation_Part1(string fieldName, string value, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_06- New employee timesheet creation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 20
+            argumentsOfScenario.Add("FieldName", fieldName);
+            argumentsOfScenario.Add("value", value);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_03 Employee ID validation - Part 1", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -174,26 +175,291 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
+#line 20
+testRunner.When("I click on \'CreateNew\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
 #line 21
-testRunner.When("I click on \'Create New\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And(string.Format("I enter \"{0}\" in \"{1}\"", value, fieldName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "key",
+                            "Value"});
+                table2.AddRow(new string[] {
+                            "EmployeeID",
+                            "Please provide an employee ID. IDs are CDT followed by 4 digits (e.g. CTD9001)."});
 #line 22
-testRunner.And("I enter valid details for new employee creation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should see validations for fields", ((string)(null)), table2, "Then ");
 #line hidden
-#line 23
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_03 Employee ID validation - Part 1, Variant 0", SourceLine=26)]
+        public virtual void TC_New_03EmployeeIDValidation_Part1_Variant0()
+        {
+#line 19
+this.TC_New_03EmployeeIDValidation_Part1("EmployeeId", "DDT123", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_03 Employee ID validation - Part 1, Variant 1", SourceLine=26)]
+        public virtual void TC_New_03EmployeeIDValidation_Part1_Variant1()
+        {
+#line 19
+this.TC_New_03EmployeeIDValidation_Part1("EmployeeId", "CDT#123", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_03 Employee ID validation - Part 1, Variant 2", SourceLine=26)]
+        public virtual void TC_New_03EmployeeIDValidation_Part1_Variant2()
+        {
+#line 19
+this.TC_New_03EmployeeIDValidation_Part1("EmployeeId", "123456", ((string[])(null)));
+#line hidden
+        }
+        
+        public virtual void TC_New_03EmployeeIDValidation_Part2(string fieldName, string value, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("FieldName", fieldName);
+            argumentsOfScenario.Add("value", value);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_03 Employee ID validation - Part 2", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 31
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 32
+testRunner.When("I click on \'CreateNew\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 33
+testRunner.And("I enter \"invalid\" details for new employee creation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 34
 testRunner.And("I click on \'Save\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 24
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "key",
+                            "Value"});
+                table3.AddRow(new string[] {
+                            "EmployeeID",
+                            "Please provide an employee ID. IDs are CDT followed by 4 digits (e.g. CTD9001)."});
+#line 35
+testRunner.Then("I should see validations for fields", ((string)(null)), table3, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_03 Employee ID validation - Part 2, EmployeeId", SourceLine=39)]
+        public virtual void TC_New_03EmployeeIDValidation_Part2_EmployeeId()
+        {
+#line 31
+this.TC_New_03EmployeeIDValidation_Part2("EmployeeId", "DDT123", ((string[])(null)));
+#line hidden
+        }
+        
+        public virtual void TC_New_04HourlyRateValidation(string fieldName, string value, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("FieldName", fieldName);
+            argumentsOfScenario.Add("value", value);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_04 Hourly Rate validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 43
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 44
+testRunner.When("I click on \'CreateNew\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 45
+testRunner.And(string.Format("I enter \"{0}\" in \"{1}\"", value, fieldName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 46
+testRunner.And("I click on \'Save\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "key",
+                            "Value"});
+                table4.AddRow(new string[] {
+                            "HourlyRate",
+                            "The field Hourly Rate ($) must be a number."});
+#line 47
+testRunner.Then("I should see validations for fields", ((string)(null)), table4, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_04 Hourly Rate validation, Variant 0", SourceLine=51)]
+        public virtual void TC_New_04HourlyRateValidation_Variant0()
+        {
+#line 43
+this.TC_New_04HourlyRateValidation("HourlyRate", "abc", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_04 Hourly Rate validation, Variant 1", SourceLine=51)]
+        public virtual void TC_New_04HourlyRateValidation_Variant1()
+        {
+#line 43
+this.TC_New_04HourlyRateValidation("HourlyRate", "-234.", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_04 Hourly Rate validation, Variant 2", SourceLine=51)]
+        public virtual void TC_New_04HourlyRateValidation_Variant2()
+        {
+#line 43
+this.TC_New_04HourlyRateValidation("HourlyRate", "ab234", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_06- New employee timesheet creation(End-end)", SourceLine=55)]
+        public virtual void TC_New_06_NewEmployeeTimesheetCreationEnd_End()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_06- New employee timesheet creation(End-end)", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 56
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 57
+testRunner.When("I click on \'CreateNew\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 58
+testRunner.And("I enter \"valid\" details for new employee creation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 59
+testRunner.And("I click on \'Save\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 60
 testRunner.Then("I should be navigated to page with title containing \"Details\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 25
-testRunner.And("created employee details should be same as entered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 61
+testRunner.And("verify employee details same as entered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 26
-testRunner.When("I click on \'Back To List\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 62
+testRunner.When("I click on \'BackToList\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 27
-testRunner.And("new employee should be seen in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 63
+testRunner.Then("new employee details displayed in the table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("TC_New_07- Duplicate employee Id", SourceLine=64)]
+        public virtual void TC_New_07_DuplicateEmployeeId()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_New_07- Duplicate employee Id", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 65
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 66
+testRunner.When("I click on \'CreateNew\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 67
+testRunner.And("I enter \"valid\" details for new employee creation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 68
+testRunner.And("I click on \'Save\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 69
+testRunner.Then("I should be navigated to page with title containing \"Details\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 70
+testRunner.When("I use same employee Id to create another payer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "key",
+                            "Value"});
+                table5.AddRow(new string[] {
+                            "EmployeeID",
+                            "Please provide an unique employee Id."});
+#line 71
+testRunner.Then("I should see validations for fields", ((string)(null)), table5, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
