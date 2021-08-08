@@ -15,18 +15,20 @@ namespace CodatExam.Pages
     {
         private IWebDriver _driver;
         DetailsEmployee _detailsEmployee;
+        IndexEmployee _indexEmployee;
         private string _employeeId;
         private string _dayOfTheWeek;
         private int _hours;
         private int _minutes;
         private decimal _hourlyRate;
-        public string _timeSheetId;
+        public string _employeeTimeSheetId;
 
 
         public CreateNewEmployee(IWebDriver driver)
         {
             _driver = driver;
             _detailsEmployee = new DetailsEmployee(_driver);
+            _indexEmployee = new IndexEmployee(driver);
         }
 
         public void NavigateToHomePage(string Url)
@@ -39,17 +41,18 @@ namespace CodatExam.Pages
             switch (linkName)
             {
                 case "CreateNew":
-                    BtnCreateNew.Click();
+                    _driver.Click(BtnCreateNew);
                     _driver.TitleContains("Create");
                     break;
                 case "BackToList":
-                    LnkBackToList.Click();
+                    _driver.Click(LnkBackToList);
                     _driver.TitleContains("Index");
                     break;
                 case "Save":
-                    BtnSave.Click();
+                    _driver.Click(BtnSave);
                     break;
                 case "AddNewRow":
+                    //_driver.Click(BtnAddRow);
                     BtnAddRow.SendKeys(Keys.Return);
                     break;
                 default:
@@ -91,7 +94,14 @@ namespace CodatExam.Pages
                     switch (key.Key)
                     {
                         case "EmployeeID":
-                             Assert.True(ErrEmployeeId.Text.Contains(key.Value), "Employee ID validation message not shown");
+                            try
+                            {
+                                Assert.True(ErrEmployeeId.Text.Contains(key.Value), "Employee ID validation message not shown");
+                            }
+                            catch (NoSuchElementException)
+                            {
+                                Assert.Fail("Validation message for Employee Id is not shown");
+                            }
                              break;
                         case "HourlyRate":
                             Debug.Write(ErrHourlyRate.Text);
@@ -159,7 +169,7 @@ namespace CodatExam.Pages
                 _minutes = GenerateRandomNumber(-50, 0);
                 _driver.SendKeys(TxtMinutes, _minutes.ToString());
             }
-            BtnAddRow.SendKeys(Keys.Return);
+             _driver.Click(BtnAddRow);
         }
 
         public void EnterSameEmployeeDetails()
@@ -189,8 +199,33 @@ namespace CodatExam.Pages
             Assert.True(_detailsEmployee.ConfirmedTimeSheets.Text.Contains(_hours.ToString()));
             Assert.True(_detailsEmployee.ConfirmedTimeSheets.Text.Contains(_minutes.ToString()));
 
-            _timeSheetId = _detailsEmployee.ConfirmedTimeSheetId.Text.Replace("Timesheet", string.Empty).Trim();
+            _employeeTimeSheetId = _detailsEmployee.ConfirmedTimeSheetId.Text.Replace("Timesheet", string.Empty).Trim();
             Console.WriteLine("Steps successful");
+        }
+
+        public void VerifyNewEmployeeInTable()
+        {
+            int exists = VerifyEmployeeInTable(_employeeTimeSheetId);
+            if (exists == 1)
+                Assert.True(1 == 1, "Created new employee {0} exists in table", _employeeTimeSheetId);
+            else
+                Assert.Fail("Created new employee {0} does not exist in table", _employeeTimeSheetId);
+        }
+
+        public int VerifyEmployeeInTable(string timesheetId)
+        {
+            int timeIdFound = 0;
+            string TimesheetId = timesheetId;
+            foreach (IWebElement timesheetrow in _indexEmployee.EmployeeTimeSheetColumn)
+            {
+                if (timesheetrow.Text.Contains(TimesheetId))
+                {
+                    timeIdFound += 1;
+                    break;
+                }
+            }
+            //Console.WriteLine("New employee details can be seen in Index page.");
+            return timeIdFound;
         }
 
         private int GenerateRandomNumber(int min,int max)

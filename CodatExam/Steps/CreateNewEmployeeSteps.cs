@@ -20,7 +20,7 @@ namespace CodatExam.Steps
                 _driver = webDriverContext.Driver;
                 _configSettings = webDriverContext.configSettings;
                 _createNewEmployee = new CreateNewEmployee(_driver);
-                _indexEmployee = new IndexEmployee(_driver, _createNewEmployee);
+                _indexEmployee = new IndexEmployee(_driver);
         }
       
         [Given(@"I am in Codat main page")]
@@ -70,7 +70,7 @@ namespace CodatExam.Steps
         [Then(@"new employee details displayed in the table")]
         public void ThenNewEmployeeDetailsDisplayedInTheTable()
         {
-            _indexEmployee.VerifyCreatedEmployeeInTable();
+            _createNewEmployee.VerifyNewEmployeeInTable();
         }
 
         [When(@"I use same employee Id to create another payer")]

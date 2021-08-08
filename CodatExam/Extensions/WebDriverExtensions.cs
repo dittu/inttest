@@ -45,5 +45,25 @@ namespace CodatLibrary.Extensions
                 Console.WriteLine(e.Message);
             }
         }
+
+        public static void Click(this IWebDriver driver,IWebElement element)
+        {
+            try
+            {
+                if (!element.Displayed)
+                {
+                    driver.WaitUntilElementClickable(element);
+                    element.Click();
+                }
+                if (element.Displayed)
+                {
+                    element.Click();
+                }
+            }
+            catch (NoSuchElementException)
+            {
+                Console.WriteLine("Element {0} is not available to click", element);
+            }
+        }
     }
 }

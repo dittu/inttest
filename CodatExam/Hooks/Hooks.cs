@@ -10,22 +10,26 @@ using TechTalk.SpecFlow.Tracing;
 
 namespace CodatExam.Hooks
 {
-    public sealed class Hooks
+    [Binding]
+    public class Hooks
     {
         private readonly IWebDriver _webDriver;
         private ScenarioContext _scenarioContext;
         private FeatureContext _featureContext;
-        public Hooks(WebDriverContext webDriverContext,ScenarioContext scenarioContext,FeatureContext featureContext)
+        public Hooks(WebDriverContext webDriverContext, ScenarioContext scenarioContext, FeatureContext featureContext)
         {
             _webDriver = webDriverContext.Driver;
             _scenarioContext = scenarioContext;
             _featureContext = featureContext;
         }
 
-        private static IConfiguration config;
-
-        [BeforeScenario]
         
+        [BeforeScenario]
+        public void SetupTestUsers()
+        {
+            System.Diagnostics.Debug.WriteLine("Test");
+        }
+
         [AfterScenario]
         public void TearDown()
         {
